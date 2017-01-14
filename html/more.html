@@ -1,0 +1,21 @@
+<!-- header -->
+	<header>
+		<div class="header_content">
+			<span class="back" ng-click="backToUpper()"></span>
+			<h2>转盘抽奖</h2>
+			<span class="logout" ng-click="logout_login()"></span>
+		</div>
+	</header>
+	<!-- content -->
+	<section>
+		<div class="content">
+			<div class="lottery_draw_wrapper">
+				<div class="lottery_draw" ng-click="getPrize()">抽奖</div>
+			</div>
+			<div class="lottery_draw_content">
+				<ul>
+					<li ng-repeat="x in getPrizeUser"><span class="win_prize"><span ng-bind="x.fruit"></span><span>等奖</span><span class="lottery_draw_name" ng-bind="x.userID"></span><span ng-bind="x.timer"></span></span></li>
+				</ul>
+			</div>
+		</div>		
+	</section>

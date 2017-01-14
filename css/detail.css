@@ -1,0 +1,204 @@
+html,body,ul,li,dl,ol,dt,dd,p,h1,h2,h3,h4,h5,h6,img,span,figure,figcaption,div{
+	margin: 0;
+	padding: 0;
+}
+img{
+	border: 0;
+}
+a{
+	text-decoration: none;
+}
+ul,li{
+	list-style: none;
+}
+html{
+	font-size: 100px;
+}
+html,body{
+	height: 100%;
+}
+/* header */
+header{
+	width: 100%;
+	height: .88rem;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999;
+}
+header .header_content{
+	width: 100%;
+	height: 100%;
+	background-color: #a90506;
+	text-align: center;
+	display: flex;
+	flex: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+}
+header .header_content .back{
+	display: block;
+	width: .44rem;
+	height: .41rem;
+	background: url('../images/back_upper.png') no-repeat;
+	background-size: cover;
+	margin-left: .25rem;
+}
+header .header_content h2{
+	font-size: .35rem;
+	color: #fff;
+	font-family: "microsoft yahei";
+	font-weight: normal;
+}
+header .header_content .logout{
+	display: block;
+	width: 1.05rem;
+	height: .55rem;
+	background: url('../images/shopping_cart.png') no-repeat;
+	background-size: cover;
+	margin-right: .15rem;
+}
+/* content */
+section{
+	width: 100%;
+	height: 100%;
+	margin-top: .88rem;
+	border-top: 1px solid #9a9fa5;
+}
+section .content{
+	width: 100%;
+	height: 100%;
+	background-color: #f3eff0;
+}
+section .content .goods_detail{
+	width: 100%;
+	height: auto;
+	margin-bottom: .7rem;
+}
+section .content .swiper-container{
+	width: 100%;
+	height: 3.7rem;
+	overflow: hidden;
+}
+section .content .swiper-container .swiper-slide img{
+	width: 100%;
+	height: 100%;
+}
+section .content .goods_detail .goods_detail_name{
+	margin-top: .7rem;
+	margin-left: .3rem;
+	font-size: .3rem;
+	color: #454545;
+	font-family: "microsoft yahei";
+}
+section .content .goods_detail .goods_detail_price{
+	margin: .25rem 0;
+	display: flex;
+	flex: row nowrap;
+}
+section .content .goods_detail .goods_detail_price .really_price{
+	display: block;
+	margin-left: .3rem;
+	margin-right: .3rem;
+	font-size: .3rem;
+	color: #ba0a55;
+	font-family: "microsoft yahei";
+}
+section .content .goods_detail .goods_detail_price .original_price{
+	display: block;
+	margin-left: .3rem;
+	font-size: .3rem;
+	color: #454545;
+	font-family: "microsoft yahei";
+	text-decoration: line-through;
+}
+section .content .goods_detail .purchase_people{
+	display: flex;
+	flex: row nowrap;
+}
+section .content .goods_detail .purchase_people span{
+	margin-left: .3rem;
+	font-size: .3rem;
+	color: #454545;
+	font-family: "microsoft yahei";
+}
+section .content .viewCart{
+	width: 100%;
+	height: .98rem;
+	background-color: #fff;
+	display: flex;
+	flex: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+	transition: all linear .5s;
+}
+section .content .viewCart a{
+	font-size: .3rem;
+	color: #656565;
+	font-family: "microsoft yahei";
+}
+section .content .viewCart .viewCart_icon{
+	display: block;
+	width: .34rem;
+	height: .34rem;
+	background: url('../images/viewCart.png') no-repeat;
+	background-size: cover;
+	margin-left: .3rem;
+}
+section .content .viewCart .viewCart_go{
+	display: block;
+	width: .12rem;
+	height: .17rem;
+	background: url('../images/viewCart_go.png') no-repeat;
+	background-size: cover;
+	margin-right: .3rem;
+}
+section .content .viewCart_content{
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: .3rem;
+}
+section .content .viewCart_content .details_content_pic{
+	width: 100%;
+	height: 4.28rem;
+	overflow: hidden;	
+}
+section .content .viewCart_content .details_content_pic img{
+	width: 100%;
+	height: 100%;
+}
+section .content .viewCart_content span{
+	font-size: .23rem;
+	color: #8a8a8a;
+	margin: .14rem 0;
+	width: 96%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+section .content .add_shopping_cart_wrapper{
+	width: 100%;
+	height: .98rem;
+	background-color: #a3a3a3;
+	display: flex;
+	flex: row nowrap;
+	justify-content: center;
+	align-items: center;
+}
+section .content .add_shopping_cart_wrapper .add_shopping_cart{
+	display: block;
+	width: 4.36rem;
+	height: .8rem;
+	font-size: .3rem;
+	color: #fff;
+	text-align: center;
+	line-height: .8rem;
+	background-color: #a21615;
+	font-family: "microsoft yahei";
+	border: 1px solid #920201;
+	border-radius: 4px;
+}

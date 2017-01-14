@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>登录</title>
+	<link rel="stylesheet" type="text/css" href="../css/index.css">
+	<link rel="stylesheet" type="text/css" href="../css/login.css">
+</head>
+<body>
+	<!-- header -->
+	<header>
+		<div class="header_title">
+			<h2>开心摇摇用户登录</h2>
+		</div>
+	</header>
+	<!-- content -->
+	<section>
+		<div class="content" ng-app="loginApp" ng-controller="loginCtrl">
+			<div>
+				<input  type="text" id="login_username" ng-model="userName" name="" placeholder="请输入账户" required>
+			</div>
+			<div>
+				<input type="password" id="login_userpwd" ng-model="userPwd" name="" placeholder="请输入密码" required>
+			</div>
+			<div class="about_pwd">
+			<input type="checkbox" name="">
+				<span class="show_pwd">显示密码</span>
+				<a href="#" title="" class="forget_pwd">忘记密码？</a>
+			</div>
+			<div class="want_save_pwd">
+				<input type="checkbox" name="" checked>
+				<span class="remember_pwd">记住密码自动登录</span>
+			</div>
+			<button type="submit" id="login_confirm" ng-click="login()">登录</button>
+			<button type="submit" id="login_register" ng-click="forwardRegister()">注册</button>
+			<span id="showTime"></span>
+		</div>
+	</section>
+
+
+	<!-- js -->
+	<script type="text/javascript" src="../lib/angular/angular.min.js"></script>
+	<script type="text/javascript">
+	// 设置根字体
+		var oHtml =document.getElementsByTagName("html")[0],
+			screenWidth = document.documentElement.offsetWidth || document.body.offsetWidth,
+			nowFont = 100*screenWidth/640;
+			oHtml.style.fontSize = nowFont + 'px';
+	// 请求登录数据
+		var myApp = angular.module('loginApp', []).controller('loginCtrl', function($scope,$http){
+			$scope.userName = "";
+			$scope.userPwd = "";
+			$scope.login = function () {
+				var userLoginInfo = "status=login&userID="+$scope.userName+"&password="+$scope.userPwd;
+				if($scope.userName && $scope.userPwd){
+					$http({
+						url:"http://datainfo.duapp.com/shopdata/userinfo.php",
+						method:"get",
+						params:{
+							"status":"login",
+							"userID":$scope.userName,
+							"password":$scope.userPwd
+						}
+					}).success(function (res) {
+						console.log(res.userID);
+						$scope.userID = res.userID;
+						localStorage.userID = res.userID;
+						setTimeout(function () {
+							window.location.href = "homepage.html";
+						},2000);
+						/*console.log(res);
+						var count = 3;
+						function countDown() {
+							count--;
+						}
+						if (count == 1) {
+							window.location.href = "homepage.html";
+						}
+						if(document.layers)
+						{   
+							document.layers.showtime.document.write(count);   
+							document.layers.showtime.document.close();   
+						}   
+						else if(document.all)
+						{
+							showtime.innerHTML=count+" 秒后自动返回 ...";
+						}
+
+						setTimeout("countDown()",1000);   
+						}   */
+					});
+				}else {
+					alert("请输入正确的用户名和密码");
+				}
+			};
+			$scope.forwardRegister = function () {
+				location.href = "register.html";
+			}
+		});
+	</script>
+</body>
+</html>

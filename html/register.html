@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>注册</title>
+	<link rel="stylesheet" type="text/css" href="../css/index.css">
+	<link rel="stylesheet" type="text/css" href="../css/register.css">
+</head>
+<body>
+	<!-- header -->
+	<header>
+		<div class="header_content">
+			<span class="back"></span>
+			<h2>用户注册</h2>
+		</div>
+	</header>
+	<!-- content -->
+	<section>
+		<div class="content" ng-app="registerApp" ng-controller="registerCtrl">
+			<div>
+				<span class="username_title">账户名称：</span>
+				<input  type="text" id="username" ng-model="userName" name="" placeholder="请输入账户" required>
+			</div>
+			<div>
+				<span class="userpwd_title">登录密码：</span>
+				<input type="password" id="userpwd" ng-model="userPwd" name="" placeholder="请输入密码" required>
+			</div>
+			<div>
+				<span class="confirm_pwd_title">确认密码：</span>
+				<input type="password" id="confirm_pwd" ng-model="confirmPwd" ng-model name="" placeholder="请输入密码" required>
+			</div>
+			<button type="submit" id="confirm_register" ng-click="regist()">确定注册</button>
+		</div>
+	</section>
+
+
+	<!-- js -->
+	<script type="text/javascript" src="../lib/angular/angular.min.js"></script>
+	<script type="text/javascript">
+	// 设置根字体大小
+		var oHtml =document.getElementsByTagName("html")[0],
+			screenWidth = document.documentElement.offsetWidth || document.body.offsetWidth,
+			nowFont = 100*screenWidth/640;
+			oHtml.style.fontSize = nowFont + 'px';
+	// 请求注册数据
+		var myApp = angular.module('registerApp', []);
+			myApp.controller('registerCtrl',function($scope,$http){
+				$scope.userName = "";
+				$scope.userPwd = "";
+				$scope.confirmPwd = "";
+				$scope.regist = function () {
+					var userRegisterInfo = "status=register&userID="+$scope.userName+"&password="+$scope.userPwd;
+					if($scope.userPwd == $scope.confirmPwd){
+						$http({
+							url:" http://datainfo.duapp.com/shopdata/userinfo.php",
+							method:"get",
+							params:{
+								"status":"register",
+								"userID":$scope.userName,
+								"password":$scope.userPwd
+							}
+						}).success(function(res){
+							console.log(res);
+							setTimeout(function () {
+								location.href = "login.html";
+							},3000);
+						})
+					}else {
+						alert("前后密码不一致,请重新输入！");
+					}
+				}	
+			})
+	</script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Template</title>
+	<link rel="stylesheet" type="text/css" href="../css/index.css">
+	<link rel="stylesheet" type="text/css" href="../css/homepage.css">
+	<link rel="stylesheet" type="text/css" href="../css/myXiu.css">
+	<link rel="stylesheet" type="text/css" href="../css/homeIndex.css">
+	<link rel="stylesheet" type="text/css" href="../css/list.css">
+	<link rel="stylesheet" type="text/css" href="../css/shopping.css">
+	<link rel="stylesheet" type="text/css" href="../iconFont/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="../css/more.css">
+</head>
+<body ng-app="homePage">
+
+	<div ng-view></div>
+	
+	<!-- footer -->
+	<footer id="footer_warpper">
+	<div class="homePage active">
+		<figure>
+			<a href="#/" title="">
+			<img src="../images/homepage.png" alt="homepage" title="homepage">
+			<figcaption>首页</figcaption>
+			</a>
+		</figure>
+	</div>
+	<div class="classify">
+		<figure>
+			<a href="#/list" title="">
+			<img src="../images/classify.png" alt="classify" title="classify">
+			<figcaption>分类</figcaption>
+			</a>
+		</figure>	
+			
+	</div>
+	<div class="shoppingCart">
+		<figure>
+			<a href="#/shopping" title="">
+				<img src="../images/shoppingCart.png" alt="shoppingCart" title="shoppingCart">
+				<figcaption>购物车</figcaption>
+			</a>
+		</figure>
+	</div>
+	<div class="myXiu">
+		<figure>
+			<a href="#/myXiu" title="">
+				<img  src="../images/personal.png" alt="personal" title="personal">
+				<figcaption>我的秀</figcaption>
+			</a>
+		</figure>
+	</div>
+	<div class="more">
+		<figure>
+			<a href="#/more" title="">
+				<img  src="../images/more.png" alt="more" title="more">
+				<figcaption>更多</figcaption>
+			</a>
+		</figure>
+	</div>
+	</footer>
+
+	<script type="text/javascript" src="../lib/jquery/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="../lib/iscroll/iscroll.js"></script>
+	<script type="text/javascript" src="../lib/angular/angular.min.js"></script>
+	<script type="text/javascript" src="../lib/angular/angular-router.js"></script>
+	<script type="text/javascript">
+	// 根据屏幕尺寸设置相应根字体大小
+	  var oHtml = document.getElementsByTagName('html')[0],
+	    screenWidth = document.documentElement.offsetWidth || document.body.offsetWidth,
+	    nowFont = 100*screenWidth / 640;
+	    oHtml.style.fontSize = nowFont+"px";
+   // 移动点击事件
+	   	$("#footer_warpper>div").on('click',function() {
+	   		$(this).addClass('active').siblings().removeClass('active');
+	   	});
+	//设置scroll
+	/*var myscroll;
+	function loaded(){
+		setTimeout(function(){
+			myscroll = new iScroll("wrapper");
+		},300);
+	}
+	window.addEventListener("load",loaded,false);*/
+	//angular routing
+	    var myApp = angular.module('homePage', ['ngRoute']);
+		    myApp.config(['$routeProvider',function($routeProvider){
+		    	$routeProvider
+		    	.when('/',{
+		    		templateUrl:'homeIndex.html',
+		    		controller:"homeCtrl"
+		    	})
+		    	.when('/list',{
+		    		templateUrl:"list.html",
+		    		controller:"listCtrl"
+		    	})
+		    	.when('/shopping',{
+		    		templateUrl:"shopping.html",
+		    		controller:"shoppingCtrl"
+		    	})
+		    	.when('/myXiu',{
+		    		templateUrl:"myXiu.html",
+		    		controller:"myXiuCtrl"
+		    	})
+		    	.when('/more',{
+		    		templateUrl:"more.html",
+		    		controller:"moreCtrl"
+		    	})
+		    	.otherwise({redirectTo:'/'});//如果hash值都不是上面任意一个的情况下 跳回到/地址下
+		    }]);
+
+	    /*商品列表页*/
+		myApp.controller('listCtrl',function($scope,$http,$sce){
+			// 分类数据
+			$http({
+				url:"http://datainfo.duapp.com/shopdata/getclass.php"
+			}).success(function(res){
+				// console.log(res);
+				for (var i = 0; i < res.length; i++) {
+					res[i].icon = $sce.trustAsHtml(res[i].icon);
+				}
+				$scope.classifyData = res;
+			});
+
+			// 通过设置点击icon图标显示不同类型的商品
+			$scope.listClick = function (classID) {
+				$scope.classifyID = classID;
+				var listUrl = "http://datainfo.duapp.com/shopdata/getGoods.php?classID="+classID+"&callback=JSON_CALLBACK";
+				// console.log(classID);
+				console.log(listUrl);
+				$http.jsonp(listUrl).success(function(res) {
+					console.log(res);
+					$scope.listGoodsInfo = res;
+				});
+			}
+
+			/*商品详情页数据* 这里有个顺序问题，我也不知道why....*/
+			$scope.toDetail = function(goodsID) {
+				$scope.detailGoods = goodsID;
+				localStorage.detailGoodsID = goodsID;
+				window.location.href = "detail.html";
+				
+				// var listUrl = "http://datainfo.duapp.com/shopdata/getGoods.php?goodsID="+goodsID+"&callback=JSON_CALLBACK";
+				// console.log(goodsID); 
+				
+				// $http.jsonp(listUrl).success(function (res) {
+				// 	console.log(res);
+				// });
+			}
+
+			/*商品或列表数据*/
+			var listUrl = "http://datainfo.duapp.com/shopdata/getGoods.php?callback=JSON_CALLBACK";
+			$http.jsonp(listUrl).success(function(data) {
+				// console.log(data);
+				$scope.listGoodsInfo = data;
+				});
+			});
+			
+			/*主页请求数据*/
+		 	 myApp.controller('homeCtrl',function($scope,$http){
+	  			$http.jsonp("http://datainfo.duapp.com/shopdata/getBanner.php?callback=JSON_CALLBACK").success(function (res) {
+	  				$scope.data = res;
+	  				$scope.imgList = {};
+	  				for (var i = 0; i < res.length; i++) {
+	  					$scope.imgList[i] = JSON.parse(res[i].goodsBenUrl);
+	  				}
+	  				console.log($scope.imgList);
+	  		});
+	  			$scope.search_goods = function(){
+	  				var selectText = $("#search_input").val();
+	  				var searchUrl = " http://datainfo.duapp.com/shopdata/selectGoodes.php?selectText="+selectText+"&callback=JSON_CALLBACK";	
+	  				// console.log(selectText);
+	  				if (selectText) {
+	  					$http.jsonp(searchUrl).success(function (res) {
+	  						console.log(res);
+	  						$scope.searchGoods = res;
+	  					})
+	  				}
+	  			}
+		  });
+
+		 /*根据localStorage获取相应的商品goodsID,显示到购物车页面*/
+		 var goodsID = localStorage.detailGoodsID,
+		 	 userID = localStorage.userID;
+		  console.log(userID);
+		 	myApp.controller('shoppingCtrl', function($scope,$http){
+		 		if(userID){
+		 			var listUrl = "http://datainfo.duapp.com/shopdata/getCar.php?userID="+userID+"&callback=JSON_CALLBACK";
+		 			$http.jsonp(listUrl).success(function(res){
+		 				// console.log(res);
+		 				$scope.datas = res;
+		 			});
+		 		}else {
+		 			alert("请去选择商品...");
+		 		};
+		 		$scope.balanceAccount = function(){
+		 			window.location.href ="homepage.html#/";
+		 		}
+		 	})
+
+	 	  /*获取用户信息*/
+	 	 	myApp.controller('myXiuCtrl', function($scope,$http){
+	 	 		var url = "http://datainfo.duapp.com/shopdata/getuser.php?userID="+userID+"&callback=JSON_CALLBACK";
+	 	 		$http.jsonp(url).success(function(res){
+	 	 			$scope.userInfo = res[0];
+	 	 			console.log($scope.userInfo);
+	 	 		});
+ 	 	})
+	 	 	
+	 	 /*请求中奖信息*/
+	 	 myApp.controller('moreCtrl',function($scope,$http){
+	 	 	var getPrizeUrl = "http://datainfo.duapp.com/lottery/getsuerfr.php?callback=JSON_CALLBACK";
+	 	 	if (userID){
+	 	 		$scope.getPrize = function(){
+	 	 			$(".lottery_draw").css({
+	 	 				"transition":"all 2s linear",
+	 	 				"transform":"rotate(360deg)"
+	 	 			});
+	 	 			$http({
+	 	 				"url":"http://datainfo.duapp.com/lottery/fruitsubmit.php",
+	 	 				"method":"GET",
+	 	 				"params":{
+	 	 					"userID":userID,
+	 	 					"fruit":"2"
+	 	 				}
+	 	 			}).success(function (res1) {
+	 	 				console.log(res1);
+	 	 				if (res1 == 0) {
+	 	 					alert("你已经抽过奖了！");
+	 	 				}else if (res1 == 1) {
+	 	 					alert("抽奖成功！");
+	 	 				}else if (res1 == 2) {
+	 	 					alert("还可以抽奖哟...");
+	 	 				}else{
+	 	 					alert("发生了一起莫名的错误...");
+	 	 				}
+	 	 			})
+	 	 		}
+	 	 	}else {
+	 	 		alert("you are login_out...");
+	 	 	}
+ 	 		$http.jsonp(getPrizeUrl).success(function(res){
+ 	 		// console.log(res);
+ 	 		$scope.getPrizeUser = res;
+ 	 		console.log($scope.getPrizeUser[0]);
+ 	 	});
+	 	 	$scope.logout_login = function () {
+	 	 		window.location.href = "login.html";
+	 	 	}
+	 	 	$scope.backToUpper = function () {
+	 	 		window.history.back(-1);
+	 	 	}
+	 	 });
+	</script>
+</body>
+</html>

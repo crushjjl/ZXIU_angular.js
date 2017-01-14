@@ -1,0 +1,38 @@
+<!-- header -->
+	<header>
+		<div class="header_content">
+			<h2>新品上市</h2>
+			<span class="shopping_cart"></span>
+		</div>
+	</header>
+	<!-- content -->
+	<section>
+		<div class="content" style="padding: 0;">
+			<div class="navigation_bar">
+				<ul class="navigation_bar_list">
+					<li ng-repeat="x in classifyData"><a ng-bind-html="x.icon" ng-click="listClick(x.classID)" class="iconfont taozhuang"></a></li>
+				</ul>
+			</div>
+
+			<div id="wrapper">		
+			<ul class="goods_list">
+				<li ng-repeat="x in listGoodsInfo" ng-click="toDetail(x.goodsID)">
+					<div class="goods_info">
+						<dl>
+							<dt><a href="" title=""><img ng-src="{{x.goodsListImg}}" alt="goods_img" title="goods_img"></a></dt>
+							<dd>
+								<div class="goods_name" ng-bind="x.goodsName"></div>
+								<div class="goods_price">
+									<span class="real_price" ng-bind="(x.price*x.discount/10) | currency:'¥'"></span>
+									<span class="original_price" ng-bind="x.price | currency:'¥'"></span>
+								</div>
+							</dd>
+						</dl>
+					</div>
+				</li>
+			</ul>
+			</div>
+
+		</div>
+	</section>
+	<div class="footer_null"></div>

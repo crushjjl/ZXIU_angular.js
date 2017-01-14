@@ -1,0 +1,141 @@
+/* content */
+@font-face {font-family: 'iconfont';
+    src: url('iconfont.eot'); /* IE9*/
+    src: url('iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('iconfont.woff') format('woff'), /* chrome、firefox */
+    url('iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+section .content{
+	width: 100%;
+	height: 100%;
+}
+section .navigation_bar{
+	width: 100vw;
+	height: .6rem;
+	background: rgba(0,0,0,0.3);
+	overflow: hidden;
+}
+section .navigation_bar_list{
+	width: 100%;
+	height: 100%;
+	display: -webkit-box;
+}
+section .navigation_bar_list li{
+	-webkit-box-flex:1;
+}
+section .navigation_bar_list a{
+	display: block;
+	font-size: .32rem;
+	color: #000;
+	margin: .15rem .2rem;
+}
+section .navigation_bar_list .active{
+	color: #fff;	
+}
+section .content .goods_list{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	padding-top: .45rem;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+}
+section .content .goods_list li{
+	text-align: center;
+	overflow: hidden;
+}
+section .content .goods_list dl dt img{
+	width: 2.47rem;
+	height: 2.47rem;
+}
+section .content .goods_list .goods_name{
+	font-size: .22rem;
+	color: #3a3a3a;
+	font-family: "microsoft yahei";
+	width: 1.23rem;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+section .content .goods_list .goods_price{
+	overflow: hidden;
+	margin-top: -20%;
+}
+section .content .goods_list .real_price{
+	font-size: .25rem;
+	color: #d51113;
+	font-family: "microsoft yahei";
+}
+section .content .goods_list .original_price{
+	font-size: .23rem;
+	color: #878787;
+	font-family: "microsoft yahei";
+	text-decoration: line-through;
+}
+
+
+
+
+/* footer */
+.footer_null{
+	height: .98rem;
+}
+footer{
+	width: 100%;
+	height: .98rem; 
+	background-color: #484850;
+	position: fixed;
+	bottom: 0;
+	left: 0; 
+	display: -webkit-box;
+}
+footer .homePage{
+	-webkit-box-flex: 1;
+	width: 0;
+}
+footer .classify{
+	-webkit-box-flex: 1;
+	width: 0;
+}
+footer .shoppingCart{
+	-webkit-box-flex: 1;
+	width: 0;
+}
+footer .myXiu{
+	-webkit-box-flex: 1;
+	width: 0;
+}
+footer .more{
+	-webkit-box-flex: 1;
+	width: 0;
+}
+footer figure{
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+footer figure img{
+	height: .45rem;
+	display: block;
+	margin: .15rem 0 .08rem .35rem;
+}
+footer .more figure img{
+	width: .46rem;
+	height: .12rem;
+	margin: .3rem 0 .25rem .4rem;
+}
+footer figure figcaption{
+	font-family: "microsoft yahei";
+	font-size: .25rem;
+	color: #fff;
+	text-align: center;
+}

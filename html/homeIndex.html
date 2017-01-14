@@ -1,0 +1,57 @@
+
+	<!-- header -->
+	<header> 
+		<div class="header_content">
+			<h2>ZXIU 走秀网</h2>
+		</div>
+	</header>	
+	<!-- content -->
+	<section>
+		<div class="search">
+			<span class="search_icon icon iconfont" ng-click="search_goods()">&#xe615;</span>
+			<input type="text"  name="" id="search_input" placeholder="请输入搜索内容，出来之后自己控制台里面看">
+		</div>
+		<div class="content" style="padding: 0;margin-top: 0;">
+		<div id="wrapper">
+			<ul class="homeIndex_goods_list">
+				<li ng-repeat="x in imgList">
+					<dl>
+						<dt><a href="" title=""><img ng-src="{{x[0]}}"></a></dt>
+						<dd>
+						</dd>
+					</dl>
+				</li>
+			</ul>
+		</div>
+		</div>
+	</section>
+
+
+<!-- js -->
+<!-- <script type="text/javascript">
+	// 请求数据
+	var homeApp = angular.module('homeApp', []);
+	homeApp.controller('homeCtrl',function($scope,$http){
+	$http({
+		url:"http://datainfo.duapp.com/shopdata/getBanner.php",
+		method:"get"
+	}).success(function(res){
+		// 对返回的数据进行处理，callback格式的json数据
+		eval(res);//将字符串数据转换成为可以使用的js代码
+		function callback(data){
+		console.log(data);
+		$scope.data = data;
+	}
+
+});
+// 另一种方法请求数据
+	$http.jsonp("http://datainfo.duapp.com/shopdata/	getBanner.php?callback=JSON_CALLBACK").success(function (res) {
+		$scope.data = res;
+		$scope.imgList = {};
+		for (var i = 0; i < res.length; i++) {
+		$scope.imgList[i] = JSON.parse(res[i].goodsBenUrl);
+		}
+		console.log($scope.imgList);
+		})
+	});
+</script> -->

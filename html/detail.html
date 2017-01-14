@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>商品资料</title>
+	<link rel="stylesheet" type="text/css" href="../lib/swiper/css/swiper.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/detail.css">
+</head>
+<body ng-app="detailApp" ng-controller="detailCtrl">
+<!-- header -->
+	<header>
+		<div class="header_content">
+			<span class="back"></span>
+			<h2>商品资料</h2>
+			<span class="logout" ng-click="go_shoppingCart()"></span>
+		</div>
+	</header>
+	<!-- content -->
+	<section>
+		<div class="content" >
+			<div class="goods_detail">
+				<div class="swiper-container">
+				    <div class="swiper-wrapper">
+				        <div class="swiper-slide" ng-repeat="x in goodsBenUrl">
+				        	<a href="" title=""><img ng-src="{{x}}" alt=""></a>
+				        </div>
+				    </div>
+				    <!-- 如果需要分页器 -->
+				    <div class="swiper-pagination"></div>
+				</div>
+
+				<div class="goods_detail_name" ng-bind="data.goodsName"></div>
+				<div class="goods_detail_price">
+					<span class="really_price" ng-bind="(data.price)*data.discount/10 | currency:'¥'"></span>
+					<span class="original_price" ng-bind="data.price"></span>
+				</div>
+				<div class="purchase_people">
+					<span>购买人数：<span class="purchase_number" ng-bind="data.buynumber"></span></span>
+				</div>
+			</div>
+			<div class="viewCart" ng-click="viewCartContent()">
+				<span class="viewCart_icon"></span>
+				<a href="javascript:void(0);" title="" ng-click="">查看商品详情</a>
+				<span class="viewCart_go"></span>
+			</div>
+			<div class="viewCart_content">
+				<div class="details_content_pic"><img ng-src="{{data.goodsListImg}}" alt=""></div>
+				<span>品牌名称：<span class="brand_name" ng-bind="data.goodsName"></span></span>
+				<span>商品名称：<span class="product_name" ng-bind="data.detail"></span></span>
+				<span>材质：<span class="material" ng-bind="data.detail"></span></span>
+				<span>产地：<span class="production_place">中国</span></span>
+				<span>商品编号：<span class="goods_ID" ng-bind="data.goodsID"></span></span>
+				<span>价格：<span class="washing_instructions" ng-bind="data.price | currency:'¥'"></span></span>
+				<span>所属分类：<span class="product_classify" ng-bind="data.className"></span></span>
+				<span>销量(件)：<span class="remarks" ng-bind="data.buynumber"></span></span>
+				<span>其他(热度)：<span class="other" ng-bind="data.hot"></span></span>
+			</div>
+
+			<div class="add_shopping_cart_wrapper" ng-click="addToCart()">
+				<a href="" title="" class="add_shopping_cart">添加到购物车</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- js -->
+	<script type="text/javascript" src="../lib/jquery/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="../lib/angular/angular.min.js"></script>
+	<script type="text/javascript" src="../lib/angular/angular-animate.min.js"></script>
+	<script type="text/javascript" src="../lib/swiper/js/swiper.jquery.min.js"></script>
+	<script type="text/javascript">
+
+	var goodsID = localStorage.detailGoodsID,
+		userID = localStorage.userID;
+	// console.log(goodsID);
+
+	// 根据屏幕尺寸设置相应根字体大小
+	  var oHtml = document.getElementsByTagName('html')[0],
+	    screenWidth = document.documentElement.offsetWidth || document.body.offsetWidth,
+	    nowFont = 100*screenWidth / 640;
+	    oHtml.style.fontSize = nowFont+"px";
+
+	// 根据goodsID获取数据
+	var myApp = angular.module('detailApp', ['ngAnimate']);
+		myApp.controller('detailCtrl',function($scope,$http,$timeout){
+
+		var listUrl = "http://datainfo.duapp.com/shopdata/getGoods.php?goodsID="+goodsID+"&callback=JSON_CALLBACK";	
+		$http.jsonp(listUrl).success(function(res){
+			// console.log(res);
+			$scope.data = res[0];
+			console.log($scope.data);
+			$scope.goodsBenUrl = {};
+			for (var i = 0; i < res.length; i++) {
+				$scope.goodsBenUrl[i] = JSON.parse(res[i].goodsBenUrl); 
+			}
+			$scope.goodsBenUrl = $scope.goodsBenUrl[0];
+			
+		//swiper初始化,一定要在商品数据获取完了之后再去初始化swiper，或者页面结构不会循环创建相应个数的swiper-slide。。。
+		$timeout(function () {
+			var mySwiper = new Swiper ('.swiper-container', {
+			    loop: true,
+			    autoplay:2000,
+			    // 如果需要分页器
+			    paginationClickable:true,
+			    pagination: '.swiper-pagination'
+			  });   
+		},50);
+		});
+		$scope.viewCartContent = function () {
+			$(".viewCart_content").slideToggle("slow");
+		};
+		$scope.addToCart = function(){
+			// console.log(userID,goodsID);
+			if (userID && goodsID) {
+				$http({
+					"url":"http://datainfo.duapp.com/shopdata/updatecar.php",
+					"method":"GET",
+					"params":{
+						"userID":userID,
+						"goodsID":goodsID
+					}
+				}).success(function(res){
+					console.log(res);
+				});
+			}else {
+				alert("智障,滚去登录...");
+			}
+		};
+		$scope.go_shoppingCart = function(){
+			window.location.href = "homepage.html#/shopping";
+		}
+});      
+
+		$(".back").on('click',function() {
+			window.history.back(-1);
+		});
+	</script>
+</body>
+</html>

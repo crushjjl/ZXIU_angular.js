@@ -1,0 +1,39 @@
+
+	<!-- header -->
+	<header>
+		<div class="header_content">
+			<h2>购物车</h2>
+			<span class="account" ng-click="balanceAccount()"></span>
+		</div>
+	</header>
+	<!-- content -->
+	<section>
+		<div class="goods_total">
+			<span>商品数量：<span class="goods_quantity">2</span></span>
+			<span>应付总额(不含运费)：<span class="total_amount">￥598</span></span>
+		</div>
+
+		<div class="shopping_detail">
+			<ul class="shopping_goods_list">
+				<li ng-repeat="good in datas">
+					<dl>
+						<dt><a href="" title=""><img ng-src="{{good.goodsListImg}}" alt="goods_ad" title="goods_ad"></a></dt>
+						<dd>
+							<div class="shopping_goods_name" ng-bind="good.goodsName"></div>
+							<span class="goods_delete"></span>
+							<div class="shopping_price">
+								<span>单价：<span class="unit_price" ng-bind="(good.price*good.discount/10) | currency:'¥'"></span></span>
+							</div>
+							<div class="shopping_goods_quanlitity">
+							<span class="shopping_goods_quanlitity_title">数量：
+								<span class="minus" ng-click="minusOpera()">-</span>
+								<input type="text" class="input_goods_quanlitity" name="" value="1">
+								<span class="add" ng-click="addOpera()">+</span>
+							</span>
+							</div>
+						</dd>
+					</dl>
+				</li>		
+			</ul>
+		</div>
+	</section>

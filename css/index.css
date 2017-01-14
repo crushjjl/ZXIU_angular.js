@@ -1,0 +1,146 @@
+html,body,ul,li,dl,ol,dt,dd,p,h1,h2,h3,h4,h5,h6,img,span,figure,figcaption,div{
+	margin: 0;
+	padding: 0;
+}
+img{
+	border: 0;
+}
+a{
+	text-decoration: none;
+}
+ul,li{
+	list-style: none;
+}
+html{
+	font-size: 100px;
+}
+html,body{
+	height: 100%;
+}
+// 开始动画
+.swiper-container{
+	height: 100vh;
+}
+.swiper-wrapper{
+	height: 100vh;
+}
+#wrapper_slide1{
+	position: relative;
+	overflow: hidden;
+}
+.xiu_everyday{
+	position: absolute;
+	top: 20%;
+	left: 35%;
+}
+.xiu_everyday img{
+	width: 50%;
+}
+.xiu_smile{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+.xiu_smile img{
+	width: 100%;
+}
+#wrapper_slide2{
+	position: relative;
+	overflow: hidden;
+	background-color: #f8f3f7;
+}
+.xiu_pageType img{
+	width: 100%;
+}
+.xiu_contact{
+	position: absolute;
+	bottom: 30%;
+	left: 40%;
+}
+.xiu_contact img{
+	width: 75%;
+}
+.xiu_companies{
+	position: absolute;
+	bottom: 10%;
+	left: 10%;
+}
+.xiu_companies img{
+	width: 75%;
+}
+#wrapper_slide2_son .swiper-slide{
+	position: relative;
+	overflow: hidden;
+}
+.xiu_add_to_cart{
+	position: absolute;
+	top: 5%;
+	left: 30%;
+}
+.xiu_add_to_cart img{
+	width: 90%;
+}
+.xiu_clock{
+	position: absolute;
+	top: 35%;
+	left: 30%;
+}
+.xiu_clock img{
+	width: 80%;
+}
+.xiu_freight_free{
+	position: absolute;
+	bottom: 10%;
+	left: 15%;
+}
+.xiu_freight_free img{
+	width: 80%;
+}
+.xiu_products{
+	position: absolute;
+	top: 5%;
+	left: 20%;
+}
+.xiu_products img{
+	width: 90%;
+}
+.xiu_present{
+	position: absolute;
+	top: 25%;
+	left: 15%;
+}
+.xiu_present img{
+	width: 90%;
+}
+.xiu_new_panic_buy{
+	position: absolute;
+	bottom: 10%;
+	left: 15%;
+}
+.xiu_new_panic_buy img{
+	width: 90%;
+}
+.xiu_forward_down{
+	position: absolute;
+	top: 10%;
+	left: 45%;
+}
+.xiu_forward_down img{
+	width: 100%;
+}
+.xiu_nowtobuy{
+	position: absolute;
+	bottom: 55%;
+	left: 12%;
+}
+.xiu_nowtobuy img{
+	width: 90%;
+}
+.xiu_begin_experience{
+	position: absolute;
+	bottom: 15%;
+	left: 15%;
+}
+.xiu_begin_experience img{
+	width: 90%;
+}
